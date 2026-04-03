@@ -10,7 +10,7 @@
 
 Cored is a secure, self-hosted productivity platform for teams, integrating instant messaging, organizational structures, video conferencing, and file storage.
 
-Cored IM channel plugin for OpenClaw. Connects a Cored bot to OpenClaw's AI agent pipeline so you can chat with your agent through Cored. You need to deploy the Cored server before using this plugin. See the [Quick Deploy Guide](https://coredim.com/docs/admin/install/quick-install) for setup instructions.
+Cored IM channel plugin for OpenClaw. Connects a Cored bot to OpenClaw's AI agent pipeline so you can chat with your agent through Cored. See the [Setup Tutorial](https://coredim.com/docs/admin/bots/openclaw) for how to connect Cored to OpenClaw.
 
 ## Features
 

@@ -10,7 +10,7 @@
 
 Cored 是一个安全、可自托管的团队协作平台，集成了即时通讯、组织架构、音视频会议和文件存储等功能。
 
- IM 频道插件，用于 OpenClaw。将机器人接入 OpenClaw 的 AI Agent 管线，通过与 Agent 对话。使用本插件前，需要先部署服务端，请参阅[快速部署指南](https://coredim.com/docs/admin/install/quick-install)。
+ IM 频道插件，用于 OpenClaw。将机器人接入 OpenClaw 的 AI Agent 管线，通过与 Agent 对话。请参阅[配置教程](https://coredim.com/docs/admin/bots/openclaw)了解如何将连接到 OpenClaw。
 
 ## 功能
 
