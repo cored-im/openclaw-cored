@@ -1,10 +1,9 @@
 {
   "id": "cored",
-  "name": "Cored Channel",
-  "description": "Connect OpenClaw with Cored",
-  "version": "0.1.0",
   "kind": "channel",
   "channels": ["cored"],
+  "name": "Cored Channel",
+  "description": "Connect OpenClaw with Cored",
   "configSchema": {
     "type": "object",
     "additionalProperties": false,
