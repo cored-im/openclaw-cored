@@ -1,6 +1,6 @@
 {
   "name": "@cored-im/openclaw-plugin",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Cored IM channel plugin for OpenClaw",
   "author": "Cored Limited",
   "type": "module",
