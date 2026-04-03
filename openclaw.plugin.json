@@ -16,7 +16,7 @@
       },
       "backendUrl": {
         "type": "string",
-        "description": "Cored backend URL (e.g., https://api.cored.im)"
+        "description": "Cored backend URL (e.g., https://your-backend-url.com)"
       },
       "enableEncryption": {
         "type": "boolean",
@@ -55,6 +55,6 @@
   "uiHints": {
     "appId": { "label": "App ID" },
     "appSecret": { "label": "App Secret", "sensitive": true },
-    "backendUrl": { "label": "Backend URL", "placeholder": "https://api.cored.im" }
+    "backendUrl": { "label": "Backend URL", "placeholder": "https://your-backend-url.com" }
   }
 }
