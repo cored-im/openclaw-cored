@@ -1,11 +1,20 @@
 {
   "id": "openclaw-cored",
   "name": "Cored Channel",
+  "description": "Connect OpenClaw with Cored",
   "version": "0.1.0",
+  "kind": "channel",
   "channels": ["cored"],
   "configSchema": {
     "type": "object",
+    "additionalProperties": false,
+    "required": ["appId", "appSecret", "backendUrl"],
     "properties": {
+      "enabled": {
+        "type": "boolean",
+        "description": "Enable this channel",
+        "default": true
+      },
       "appId": {
         "type": "string",
         "description": "Cored application ID"
@@ -39,13 +48,13 @@
         "additionalProperties": {
           "type": "object",
           "properties": {
+            "enabled": { "type": "boolean", "default": true },
             "appId": { "type": "string" },
             "appSecret": { "type": "string" },
             "backendUrl": { "type": "string" },
             "enableEncryption": { "type": "boolean" },
             "requestTimeout": { "type": "number" },
-            "requireMention": { "type": "boolean" },
-            "enabled": { "type": "boolean", "default": true }
+            "requireMention": { "type": "boolean" }
           },
           "required": ["appId", "appSecret", "backendUrl"]
         }

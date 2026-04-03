@@ -13,7 +13,7 @@ export const coredPlugin = {
     selectionLabel: "Cored",
     docsPath: "/channels/cored",
     blurb: "Cored enterprise IM channel",
-    aliases: ["cored", "cd"],
+    aliases: ["cored", "co"],
   },
   capabilities: {
     chatTypes: ["direct", "group"] as const,
