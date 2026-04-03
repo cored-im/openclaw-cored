@@ -64,7 +64,7 @@ describe("resolveAccountConfig", () => {
       enabled: true,
       appId: "app_1",
       appSecret: "secret_1",
-      backendUrl: "https://api.cored.im",
+      backendUrl: "https://your-backend-url.com",
       enableEncryption: true,
       requestTimeout: 30_000,
       requireMention: true,
