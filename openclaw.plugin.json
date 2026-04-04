@@ -4,6 +4,7 @@
   "channels": ["cored"],
   "name": "Cored Channel",
   "description": "Connect OpenClaw with Cored",
+  "setupEntry": "./dist/setup-entry.js",
   "configSchema": {
     "type": "object",
     "additionalProperties": false,
