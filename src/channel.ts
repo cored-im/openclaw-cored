@@ -47,7 +47,7 @@ export const base = createChannelPluginBase<CoredAccountConfig>({
   setup: {
     validateInput: ({ input }) => {
       const missing: string[] = [];
-      if (!input.appToken) missing.push("--appToken (App ID)");
+      if (!input.appToken) missing.push("--app-token (App ID)");
       if (!input.token) missing.push("--token (App Secret)");
       if (!input.url) missing.push("--url (Backend URL)");
       if (missing.length > 0) {
@@ -55,7 +55,7 @@ export const base = createChannelPluginBase<CoredAccountConfig>({
           `Missing required flags: ${missing.join(", ")}`,
           "",
           "Either provide all flags:",
-          `  openclaw channels add --channel cored --appToken <APP_ID> --token <APP_SECRET> --url <BACKEND_URL>`,
+          `  openclaw channels add --channel cored --app-token <APP_ID> --token <APP_SECRET> --url <BACKEND_URL>`,
           "",
           "Or use the interactive wizard:",
           "  openclaw channels add",
