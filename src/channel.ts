@@ -5,11 +5,14 @@ import {
   createChatChannelPlugin,
   createChannelPluginBase,
 } from "openclaw/plugin-sdk/core";
+import { createHybridChannelConfigBase } from "openclaw/plugin-sdk/channel-config-helpers";
 import type { OpenClawConfig } from "openclaw/plugin-sdk/core";
 import { listAccountIds, resolveAccountConfig } from "./config.js";
 import { sendText } from "./messaging/outbound.js";
 import { parseTarget } from "./targets.js";
 import type { CoredAccountConfig } from "./types.js";
+
+const BASE_FIELDS = ["appId", "appSecret", "backendUrl", "enabled", "enableEncryption", "requestTimeout"];
 
 export const base = createChannelPluginBase<CoredAccountConfig>({
   id: "cored",
@@ -28,37 +31,42 @@ export const base = createChannelPluginBase<CoredAccountConfig>({
   },
 
   config: {
-    listAccountIds: (cfg: OpenClawConfig) => listAccountIds(cfg),
-    resolveAccount: (cfg: OpenClawConfig, accountId?: string | null) =>
-      resolveAccountConfig(cfg, accountId ?? undefined),
-    inspectAccount(cfg: OpenClawConfig, accountId?: string | null) {
-      const resolved = resolveAccountConfig(cfg, accountId ?? undefined);
-      const hasConfig = Boolean(
-        resolved.appId && resolved.appSecret && resolved.backendUrl,
-      );
-      return {
-        enabled: resolved.enabled,
-        configured: hasConfig,
-        tokenStatus: hasConfig ? "available" : "missing",
-      };
-    },
+    ...createHybridChannelConfigBase<CoredAccountConfig>({
+      sectionKey: "cored",
+      listAccountIds: (cfg) => listAccountIds(cfg),
+      resolveAccount: (cfg, accountId) =>
+        resolveAccountConfig(cfg, accountId ?? undefined),
+      defaultAccountId: () => "default",
+      inspectAccount(cfg, accountId) {
+        const resolved = resolveAccountConfig(cfg, accountId ?? undefined);
+        const hasConfig = Boolean(
+          resolved.appId && resolved.appSecret && resolved.backendUrl,
+        );
+        return {
+          enabled: resolved.enabled,
+          configured: hasConfig,
+          tokenStatus: hasConfig ? "available" : "missing",
+        };
+      },
+      clearBaseFields: BASE_FIELDS,
+    }),
   },
 
   setup: {
     validateInput: ({ input }) => {
       const missing: string[] = [];
-      if (!input.appToken) missing.push("--app-token (App ID)");
-      if (!input.token) missing.push("--token (App Secret)");
-      if (!input.url) missing.push("--url (Backend URL)");
+      if (!input.appToken) missing.push("--app-token (App ID from Admin Console)");
+      if (!input.token) missing.push("--token (App Secret from Admin Console)");
+      if (!input.url) missing.push("--url (your Cored server address)");
       if (missing.length > 0) {
         return [
           `Missing required flags: ${missing.join(", ")}`,
           "",
-          "Either provide all flags:",
+          "Usage:",
           `  openclaw channels add --channel cored --app-token <APP_ID> --token <APP_SECRET> --url <BACKEND_URL>`,
           "",
-          "Or use the interactive wizard:",
-          "  openclaw channels add",
+          "You can find App ID and App Secret in:",
+          "  Cored Admin Console → Workplace → App Management → App Details",
         ].join("\n");
       }
       return null;
@@ -117,7 +125,8 @@ export const base = createChannelPluginBase<CoredAccountConfig>({
         preferredEnvVar: "CORED_APP_ID",
         envPrompt: "Use CORED_APP_ID from environment?",
         keepPrompt: "Keep current App ID?",
-        inputPrompt: "Enter your Cored App ID:",
+        inputPrompt:
+          "Enter App ID (from Cored Admin Console → Workplace → App Management → App Details):",
         inspect: ({ cfg, accountId }) => {
           const resolved = resolveAccountConfig(cfg, accountId ?? undefined);
           return {
@@ -133,7 +142,8 @@ export const base = createChannelPluginBase<CoredAccountConfig>({
         preferredEnvVar: "CORED_APP_SECRET",
         envPrompt: "Use CORED_APP_SECRET from environment?",
         keepPrompt: "Keep current App Secret?",
-        inputPrompt: "Enter your Cored App Secret:",
+        inputPrompt:
+          "Enter App Secret (from the same App Details page, keep this value confidential):",
         inspect: ({ cfg, accountId }) => {
           const resolved = resolveAccountConfig(cfg, accountId ?? undefined);
           return {
@@ -145,11 +155,12 @@ export const base = createChannelPluginBase<CoredAccountConfig>({
       {
         inputKey: "url",
         providerHint: "cored",
-        credentialLabel: "Backend URL",
+        credentialLabel: "Cored Server URL",
         preferredEnvVar: "CORED_BACKEND_URL",
         envPrompt: "Use CORED_BACKEND_URL from environment?",
-        keepPrompt: "Keep current Backend URL?",
-        inputPrompt: "Enter your Cored backend server URL:",
+        keepPrompt: "Keep current Cored Server URL?",
+        inputPrompt:
+          "Enter your Cored server address (e.g. http://192.168.10.10:21000):",
         inspect: ({ cfg, accountId }) => {
           const resolved = resolveAccountConfig(cfg, accountId ?? undefined);
           return {
