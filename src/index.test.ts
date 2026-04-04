@@ -151,7 +151,7 @@ describe("service start — config validation", () => {
   it("connects valid accounts normally", async () => {
     const api = createMockApi({
       channels: {
-        cored: { appId: "a", appSecret: "s", backendUrl: "https://ok.io" },
+        cored: { accounts: { default: { appId: "a", appSecret: "s", backendUrl: "https://ok.io" } } },
       },
     });
     entry.default.registerFull(api);

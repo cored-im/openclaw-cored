@@ -23,12 +23,6 @@ export interface CoredRawAccountConfig {
 }
 
 export interface CoredChannelConfig {
-  appId?: string;
-  appSecret?: string;
-  backendUrl?: string;
-  enabled?: boolean;
-  enableEncryption?: boolean;
-  requestTimeout?: number;
   accounts?: Record<string, CoredRawAccountConfig>;
 }
 
