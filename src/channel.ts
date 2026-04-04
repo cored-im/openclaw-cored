@@ -11,7 +11,7 @@ import { sendText } from "./messaging/outbound.js";
 import { parseTarget } from "./targets.js";
 import type { CoredAccountConfig } from "./types.js";
 
-const base = createChannelPluginBase<CoredAccountConfig>({
+export const base = createChannelPluginBase<CoredAccountConfig>({
   id: "cored",
 
   meta: {

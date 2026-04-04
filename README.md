@@ -93,12 +93,9 @@ openclaw gateway restart
 | `appId` | string | required | Cored application ID |
 | `appSecret` | string | required | Cored application secret |
 | `backendUrl` | string | required | Cored backend URL |
+| `enabled` | boolean | `true` | Enable/disable this account |
 | `enableEncryption` | boolean | `true` | Whether to use encrypted transport |
 | `requestTimeout` | number | `30000` | API request timeout in milliseconds |
-| `requireMention` | boolean | `true` | In group chats, only respond when @mentioned |
-| `botUserId` | string | optional | Bot's own user ID (for self-message filtering) |
-| `inboundWhitelist` | string[] | `[]` | If non-empty, only accept messages from these user IDs |
-| `enabled` | boolean | `true` | Enable/disable this account |
 
 ### Environment Variables
 
@@ -107,7 +104,6 @@ The `default` account supports environment variable fallback:
 - `CORED_APP_ID`
 - `CORED_APP_SECRET`
 - `CORED_BACKEND_URL`
-- `CORED_REQUIRE_MENTION`
 
 ## License
 
